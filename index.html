@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pamplemouche OS - Darwin Web</title>
+    <link rel="stylesheet" href="ui/desktop.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div id="desktop">
+        <div class="menu-bar">
+            <span class="apple-logo">🍊</span>
+            <span class="bold">Finder</span>
+            <span>Fichier</span>
+            <span>Édition</span>
+            <span class="spacer"></span>
+            <span id="clock">00:00</span>
+        </div>
+
+        <div class="dock">
+            <div class="dock-item" onclick="openTerminal()">📟</div>
+            <div class="dock-item">📂</div>
+            <div class="dock-item">⚙️</div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { VFS } from './core/vfs.js';
+        
+        async function boot() {
+            await VFS.init();
+            console.log("Pamplemouche OS Kernel : READY");
+            
+            // Mise à jour de l'heure
+            setInterval(() => {
+                document.getElementById('clock').innerText = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            }, 1000);
+        }
+        boot();
+    </script>
+</body>
+</html>
